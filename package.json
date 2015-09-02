@@ -1,0 +1,19 @@
+{
+  "name": "sealious-datastore-dbs-common-part",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "sealious-plugin"
+  ],
+  "author": "Sealious Team",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "bluebird": "^2.9.9",
+    "mongodb": "^1.4.30",
+    "sealious": "latest"
+  }
+}
