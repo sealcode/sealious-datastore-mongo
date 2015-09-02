@@ -14,7 +14,6 @@
   "dependencies": {
     "bluebird": "^2.9.9",
     "mongodb": "^1.4.30",
-    "sealious": "latest",
     "dbs-common-part": "git://github.com/Sealious/sealious-datastore-dbs-common-part.git#master"
   }
 }
