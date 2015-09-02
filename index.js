@@ -1,6 +1,6 @@
 var Promise = require("bluebird");
 var Sealious = require("sealious");
-var mongodb = require("mongodb");
+var Mongodb = require("mongodb");
 
 var db = null;
 
@@ -19,10 +19,11 @@ Sealious.ConfigManager.set_default_config(
 var DatastoreMongo = new function(){
 	this.start = function(){
 		var config = Sealious.ConfigManager.get_config("datastore_mongo");
-		var mongo_client = new mongodb.MongoClient(new mongodb.Server(config.host, config.port));
+		var mongo_client = new Mongodb.MongoClient(new Mongodb.Server(config.host, config.port));
 		return new Promise(function(resolve, reject){
 			mongo_client.open(function(err, mongoClient){
 				db = mongoClient.db(config.db_name);
+				console.log("Statring datastore mongo");
 				resolve();
 			});
 		});	
