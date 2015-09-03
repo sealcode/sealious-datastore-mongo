@@ -13,7 +13,7 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "bluebird": "^2.9.9",
-    "mongodb": "^1.4.30",
-    "dbs-common-part": "git://github.com/Sealious/sealious-datastore-dbs-common-part.git#master"
+    "dbs-common-part": "git://github.com/Sealious/sealious-datastore-dbs-common-part.git#master",
+    "mongodb": "^1.4.39"
   }
 }
