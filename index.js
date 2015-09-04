@@ -1,10 +1,11 @@
 var Promise = require("bluebird");
 var Sealious = require("sealious");
 var Mongodb = require("mongodb");
+var DbsCommonPart = require('sealious-datastore-dbs-common-part');
 
-var db = null;
+var private = {db: null};
 
-var datastore_mongo = new Sealious.ChipTypes.Datastore("mongo");
+var DatastoreMongo  = new Sealious.ChipTypes.Datastore("mongo");
 
 Sealious.ConfigManager.set_default_config(
 	"datastore_mongo", 
@@ -16,21 +17,18 @@ Sealious.ConfigManager.set_default_config(
 	}
 );
 
-var DatastoreMongo = new function(){
-	this.start = function(){
-		var config = Sealious.ConfigManager.get_config("datastore_mongo");
-		var mongo_client = new Mongodb.MongoClient(new Mongodb.Server(config.host, config.port));
-		return new Promise(function(resolve, reject){
-			mongo_client.open(function(err, mongoClient){
-				db = mongoClient.db(config.db_name);
-				console.log("Statring datastore mongo");
-				resolve();
-			});
-		});	
-	}
+DatastoreMongo.start = function(){
+	var config = Sealious.ConfigManager.get_config("datastore_mongo");
+	var mongo_client = new Mongodb.MongoClient(new Mongodb.Server(config.host, config.port));
+	return new Promise(function(resolve, reject){
+		mongo_client.open(function(err, mongoClient){
+			private.db = mongoClient.db(config.db_name);
+			resolve();
+		});
+	});	
 }
 
+
+DatastoreMongo = DbsCommonPart(DatastoreMongo,private);		
+
 module.exports = DatastoreMongo;
-
-
-
