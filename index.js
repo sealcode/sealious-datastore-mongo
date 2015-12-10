@@ -23,7 +23,7 @@ DatastoreMongo.start = function(){
 	return new Promise(function(resolve, reject){
 		mongo_client.open(function(err, mongoClient){
 			if (mongoClient === null)
-				reject("MongoDB was not found, please make sure it's installed");
+				reject("MongoDB was not found, please make sure it's installed. Check https://docs.mongodb.org/manual/tutorial/ for more info.");
 			else {
 				private.db = mongoClient.db(config.db_name);
 				resolve();
