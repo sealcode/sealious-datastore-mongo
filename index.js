@@ -22,8 +22,12 @@ DatastoreMongo.start = function(){
 	var mongo_client = new Mongodb.MongoClient(new Mongodb.Server(config.host, config.port));
 	return new Promise(function(resolve, reject){
 		mongo_client.open(function(err, mongoClient){
-			private.db = mongoClient.db(config.db_name);
-			resolve();
+			if (mongoClient === null)
+				reject("MongoDB was not found, please make sure it's installed. Check https://docs.mongodb.org/manual/tutorial/ for more info.");
+			else {
+				private.db = mongoClient.db(config.db_name);
+				resolve();
+			}
 		});
 	});	
 }
