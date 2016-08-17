@@ -23,32 +23,17 @@ DatastoreMongo.start = function(){
 	var config = Sealious.ConfigManager.get_config("datastore_mongo");
 
 	var url = `mongodb://${config.host}:${config.port}/${config.db_name}`;
-	return new Promise(function(resolve, reject){
-		MongoClient.connect(url, function(err, db) {
-			if (db === null){
-				reject("MongoDB was not found, please make sure it's installed. Check https://docs.mongodb.org/manual/tutorial/ for more info.");
-				return;
-			} else {
-				private.db = db;				
-				self.post_start().then(function(){
-					resolve();
-				})
-			}
-		});		
-	})
-
 
 	var mongo_client = new Mongodb.MongoClient(new Mongodb.Server(config.host, config.port));
-	return new Promise(function(resolve, reject){
-		mongo_client.connect(function(err, mongoClient){
-			if (mongoClient === null)
-				reject("MongoDB was not found, please make sure it's installed. Check https://docs.mongodb.org/manual/tutorial/ for more info.");
-			else {
-				private.db = mongoClient.db(config.db_name);
-				
-			}
-		});
-	});	
+	return Promise.promisify(mongo_client.open)()
+	.then(function(mongoClient){
+		if (mongoClient === null)
+			return Promise.reject("MongoDB was not found, please make sure it's installed. Check https://docs.mongodb.org/manual/tutorial/ for more info.");
+		else {
+			private.db = mongoClient.db(config.db_name);
+			return self.post_start();
+		}
+	});
 }
 
 
