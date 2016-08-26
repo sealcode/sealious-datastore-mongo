@@ -23,7 +23,7 @@ DatastoreMongo.start = function(){
 	var config = Sealious.ConfigManager.get_config("datastore_mongo");
 
 	var url = `mongodb://${config.host}:${config.port}/${config.db_name}`;
-	Promise.promisify(MongoClient.connect)(url)
+	return Promise.promisify(MongoClient.connect)(url)
 	.then(function(db){
 		if (db === null){
 			return Promise.reject("MongoDB was not found, please make sure it's installed. Check https://docs.mongodb.org/manual/tutorial/ for more info.");
