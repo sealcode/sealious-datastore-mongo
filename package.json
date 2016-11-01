@@ -14,6 +14,6 @@
   "dependencies": {
     "bluebird": "^2.9.9",
     "mongodb": "^2.1.7",
-    "sealious-mongo-api-abstract": "git://github.com/Sealious/sealious-mongo-api-abstract.git#alpha"
+    "sealious-mongo-api-abstract": "git://github.com/sealcode/sealious-mongo-api-abstract.git#alpha"
   }
 }
