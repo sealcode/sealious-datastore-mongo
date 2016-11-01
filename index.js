@@ -1,7 +1,7 @@
 "use strict";
 var Promise = require("bluebird");
 var MongoClient = require('mongodb').MongoClient;
-var DbsCommonPart = require('sealious-datastore-dbs-common-part');
+var DbsCommonPart = require('sealious-mongo-api-abstract');
 
 module.exports = function(App){
 	const priv = {db: null};
